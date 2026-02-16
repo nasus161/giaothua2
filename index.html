@@ -16,6 +16,7 @@
       background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
       background-size: 400% 400%;
       animation: gradient 8s ease infinite;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -27,19 +28,33 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* HOA MAI */
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 30px;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.8;
+      }
+    }
+
     .card {
       background: white;
       padding: 50px 70px;
       border-radius: 25px;
       text-align: center;
       box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-      animation: pop 0.8s ease;
-      position: relative;
-    }
-
-    @keyframes pop {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      z-index: 10;
     }
 
     h1 {
@@ -72,7 +87,6 @@
     #yes {
       background: #ff4b7d;
       color: white;
-      margin-right: 20px;
       z-index: 2;
     }
 
@@ -80,30 +94,36 @@
       background: #ddd;
       position: absolute;
       z-index: 1;
+      margin-left: 140px;
     }
 
-    #no.fade {
-      opacity: 0;
-      transition: 1s;
-    }
-
-    /* rung nhẹ ảnh */
-    .shake {
-      animation: shake 0.4s infinite;
-    }
-
-    @keyframes shake {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(2deg); }
-      50% { transform: rotate(0deg); }
-      75% { transform: rotate(-2deg); }
-      100% { transform: rotate(0deg); }
+    #yes.fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      font-size: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
+  <!-- HOA MAI -->
+  <div class="flower" style="left:10%; animation-duration:8s;">🌼</div>
+  <div class="flower" style="left:20%; animation-duration:10s;">🌼</div>
+  <div class="flower" style="left:35%; animation-duration:7s;">🌼</div>
+  <div class="flower" style="left:50%; animation-duration:9s;">🌼</div>
+  <div class="flower" style="left:65%; animation-duration:11s;">🌼</div>
+  <div class="flower" style="left:80%; animation-duration:8s;">🌼</div>
+  <div class="flower" style="left:90%; animation-duration:12s;">🌼</div>
+
+  <div class="card" id="card">
     <h1>Đón giao thừa cùng mình đêm nay nha? 🎆</h1>
     <div id="message"></div>
     <div class="buttons">
@@ -116,8 +136,8 @@
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
     const message = document.getElementById("message");
+    const card = document.getElementById("card");
 
-    let scale = 1;
     let count = 0;
 
     const texts = [
@@ -131,14 +151,12 @@
     noBtn.addEventListener("click", () => {
       message.innerText = texts[count];
       count++;
-      scale += 0.25;
-      yesBtn.style.transform = `scale(${scale})`;
 
       if (count >= 5) {
-        noBtn.classList.add("fade");
-        setTimeout(() => {
-          noBtn.style.display = "none";
-        }, 1000);
+        noBtn.style.display = "none";
+        card.style.display = "none";
+        yesBtn.classList.add("fullscreen");
+        yesBtn.innerText = "CÓ 💖 (BẤM VÀO ĐI)";
       }
     });
 
@@ -159,16 +177,10 @@
           background:linear-gradient(120deg,#ff9a9e,#fad0c4);
           color:white;
           text-align:center;
-          font-family:Segoe UI;
         ">
-          <h1 style="font-size:42px;">Không trốn được đâu baby 😈💕</h1>
-          <img src="meo.png" class="shake" style="
-            width:300px;
-            border-radius:20px;
-            margin:20px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.4);
-          ">
-          <p style="font-size:26px;">Bấm Có rồi thì tối nay overnightt với mình nhaaa 😏🔥</p>
+          <h1 style="font-size:42px;">VUI VẺ LÊN NHÉ🌼</h1>
+          <img src="meo.png" style="width:300px;border-radius:20px;margin:20px;">
+          <p style="font-size:26px;">Hứa rồi đó nhaa 🥰🎆</p>
         </div>
       `;
     });
