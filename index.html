@@ -44,7 +44,7 @@
 
     h1 {
       font-size: 30px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       color: #ff4b7d;
     }
 
@@ -86,12 +86,25 @@
       opacity: 0;
       transition: 1s;
     }
+
+    /* rung nhẹ ảnh */
+    .shake {
+      animation: shake 0.4s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(2deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(-2deg); }
+      100% { transform: rotate(0deg); }
+    }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h1 id="title">Đón giao thừa cùng mình đêm nay nha? 🎆</h1>
+    <h1>Đón giao thừa cùng mình đêm nay nha? 🎆</h1>
     <div id="message"></div>
     <div class="buttons">
       <button id="yes">Có 💖</button>
@@ -148,8 +161,14 @@
           text-align:center;
           font-family:Segoe UI;
         ">
-          <h1 style="font-size:42px;">Biết ngay mà 😈💕</h1>
-          <p style="font-size:26px;">Tối nay mình đón giao thừa cùng nhau nhé 🎇🥰</p>
+          <h1 style="font-size:42px;">Không trốn được đâu baby 😈💕</h1>
+          <img src="meo.png" class="shake" style="
+            width:300px;
+            border-radius:20px;
+            margin:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.4);
+          ">
+          <p style="font-size:26px;">Bấm Có rồi thì tối nay đi với mình nhaaa 😏🔥</p>
         </div>
       `;
     });
