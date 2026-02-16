@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đi giao thừa với mình nhé?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradient 8s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: white;
+      padding: 50px 70px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      animation: pop 0.8s ease;
+      position: relative;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: #ff4b7d;
+    }
+
+    #message {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #555;
+      min-height: 30px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 80px;
+    }
+
+    button {
+      padding: 14px 34px;
+      font-size: 20px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: #ff4b7d;
+      color: white;
+      margin-right: 20px;
+      z-index: 2;
+    }
+
+    #no {
+      background: #ddd;
+      position: absolute;
+      z-index: 1;
+    }
+
+    #no.fade {
+      opacity: 0;
+      transition: 1s;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1 id="title">Đón giao thừa cùng mình đêm nay nha? 🎆</h1>
+    <div id="message"></div>
+    <div class="buttons">
+      <button id="yes">Có 💖</button>
+      <button id="no">Không 😢</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const message = document.getElementById("message");
+
+    let scale = 1;
+    let count = 0;
+
+    const texts = [
+      "Đi màaaaaa 🥺👉👈",
+      "Cậu không được từ chối đâuuu, mình sẽ buồn lắm đó 😭💔",
+      "Suy nghĩ lại đi màaa 😖",
+      "Bấm Có đi màaa 😤💗",
+      "Không trốn được đâu baby 😈🔥"
+    ];
+
+    noBtn.addEventListener("click", () => {
+      message.innerText = texts[count];
+      count++;
+      scale += 0.25;
+      yesBtn.style.transform = `scale(${scale})`;
+
+      if (count >= 5) {
+        noBtn.classList.add("fade");
+        setTimeout(() => {
+          noBtn.style.display = "none";
+        }, 1000);
+      }
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 120 - 60;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          flex-direction:column;
+          background:linear-gradient(120deg,#ff9a9e,#fad0c4);
+          color:white;
+          text-align:center;
+          font-family:Segoe UI;
+        ">
+          <h1 style="font-size:42px;">Biết ngay mà 😈💕</h1>
+          <p style="font-size:26px;">Tối nay mình đón giao thừa cùng nhau nhé 🎇🥰</p>
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>
